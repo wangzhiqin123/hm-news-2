@@ -6,19 +6,22 @@
     <div class="logo">
       <hm-logo></hm-logo>
     </div>
-    <div class="username">
-      <input type="text" placeholder="请输入用户名">
-    </div>
-    <div class="password">
-      <input type="password" placeholder="请输入密码">
-    </div>
-    <hm-button>注册</hm-button>
+
+    <hm-input type='text' placeholder="请输入用户名"></hm-input>
+
+    <hm-input type='password' placeholder="请输入密码"></hm-input>
+
+    <hm-button @click='register'>注册</hm-button>
   </div>
 </template>
 
 <script>
 export default {
-
+  methods:{
+    register(){
+      console.log('注册')
+    }
+  }
 }
 </script>
 

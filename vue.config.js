@@ -1,7 +1,7 @@
 module.exports = {
   devServer:{
     open:true,
-    port:8889
+    // port:8889
   },
   // 配置px自动转rem的
   css: {
