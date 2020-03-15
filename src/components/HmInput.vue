@@ -16,11 +16,11 @@ export default {
   props: {
     type: {
       type: String,
-      default: "text"
+      default: 'text'
     },
     placeholder: {
       type: String,
-      default: "请输入..."
+      default: '请输入...'
     },
     value: String,
     rule: RegExp,
@@ -28,23 +28,28 @@ export default {
   },
   data() {
     return {
-      status: ""
-    };
+      status: ''
+    }
   },
   methods: {
     inputFn(e) {
-      let value = e.target.value;
-      this.$emit("input", value);
+      let value = e.target.value
+      this.$emit('input', value)
+      this.test(value)
+    },
+    test(value) {
       if (this.rule) {
-      }
-      if (this.rule.test(value)) {
-        this.status = "sucess";
-      } else {
-        this.status = "error";
+        if (this.rule.test(value)) {
+          this.status = 'sucess'
+          return true
+        } else {
+          this.status = 'error'
+          return false
+        }
       }
     }
   }
-};
+}
 </script>
 
 <style lang="less" scoped>

@@ -7,8 +7,18 @@ import "lib-flexible";
 //导入路由
 import router from "./router";
 import axios from "axios";
+// 全局导入vant组件库
+// import Vant from "vant";
+// import "vant/lib/index.css";
+// Vue.use(Vant);
+
+// 按需导入vant组件
+import { Button, Toast } from "vant";
+Vue.use(Button);
+Vue.use(Toast);
+
 // 配置基础路径
-axios.defaults.baseURL = 'http://localhost:3000'
+axios.defaults.baseURL = "http://localhost:3000";
 // 把axios绑定到了vue的原型上，所有的vue实例（组件）都可以通过 this.axios访问到axios
 Vue.prototype.$axios = axios;
 
