@@ -40,7 +40,7 @@ export default {
     test(value) {
       if (this.rule) {
         if (this.rule.test(value)) {
-          this.status = 'sucess'
+          this.status = 'success'
           return true
         } else {
           this.status = 'error'
