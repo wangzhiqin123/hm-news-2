@@ -7,6 +7,8 @@ import "lib-flexible";
 //导入路由
 import router from "./router";
 import axios from "axios";
+
+
 // 全局导入vant组件库
 // import Vant from "vant";
 // import "vant/lib/index.css";
@@ -37,6 +39,9 @@ Vue.component("hm-button", HmButton);
 // 4. 注册登录页input框组件
 import HmInput from "./components/HmInput.vue";
 Vue.component("hm-input", HmInput);
+// 5. 注册个人中心nav组件
+import HmNavbar from "./components/HmNavbar.vue";
+Vue.component("hm-navbar", HmNavbar);
 
 new Vue({
   router,
