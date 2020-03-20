@@ -1,5 +1,5 @@
 <template>
-  <div class="hm-navbar">
+  <div class="hm-navbar" @click="clickFn">
     <div class="left">
       {{ title }}
     </div>
@@ -20,6 +20,11 @@ export default {
       required: true
     },
     content: String
+  },
+  methods:{
+    clickFn(){
+      this.$emit('click')
+    }
   }
 };
 </script>

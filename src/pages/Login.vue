@@ -55,12 +55,16 @@ export default {
           password: this.password
         }
       }).then(res => {
-        console.log(res.data);
-        if (res.data.statusCode == 200) {
-          this.$toast.success("登录成功");
+        // console.log(res.data);
+        const {statusCode,message,data} = res.data
+
+        if (statusCode == 200) {
+          localStorage.setItem('token',data.token)
+          localStorage.setItem('user_id',data.user.id)
+          this.$toast.success(message);
           this.$router.push("/user");
         } else {
-          this.$toast.fail("用户名或密码错误");
+          this.$toast.fail(message);
         }
       });
     }
@@ -72,7 +76,7 @@ export default {
     };
   },
   created() {
-    console.log(this.$route);
+    // console.log(this.$route);
     this.username = this.$route.params.username,
     this.password = this.$route.params.password
   }

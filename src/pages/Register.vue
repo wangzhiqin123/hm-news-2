@@ -69,7 +69,7 @@ export default {
           password: this.password
         }
       }).then(res => {
-        console.log(res.data);
+        // console.log(res.data);
         if (res.data.statusCode == 200) {
           this.$toast.success("注册成功");
 
