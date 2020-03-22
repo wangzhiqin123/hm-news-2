@@ -52,7 +52,7 @@ export default {
     };
   },
   methods: {
-    register() {
+    async register() {
       const status1 = this.$refs.username.test(this.username);
       const status2 = this.$refs.nickname.test(this.nickname);
       const status3 = this.$refs.password.test(this.password);
@@ -60,7 +60,7 @@ export default {
         return;
       }
       console.log("注册");
-      this.$axios({
+      const res = await this.$axios({
         method: "post",
         url: "/register",
         data: {
@@ -68,19 +68,18 @@ export default {
           nickname: this.nickname,
           password: this.password
         }
-      }).then(res => {
-        // console.log(res.data);
-        if (res.data.statusCode == 200) {
-          this.$toast.success("注册成功");
-
-          this.$router.push({
-            name:"login",
-            params:{ username: this.username, password: this.password }
-          });
-        } else {
-          this.$toast.fail("用户名或密码格式错误");
-        }
       });
+      // console.log(res.data);
+      if (res.data.statusCode == 200) {
+        this.$toast.success("注册成功");
+
+        this.$router.push({
+          name: "login",
+          params: { username: this.username, password: this.password }
+        });
+      } else {
+        this.$toast.fail("用户名或密码格式错误");
+      }
     }
   }
 };

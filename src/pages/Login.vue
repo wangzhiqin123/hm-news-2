@@ -38,7 +38,7 @@
 <script>
 export default {
   methods: {
-    login() {
+    async login() {
       // console.log('登录')
       // 通过this.$axios()发送请求
       const result1 = this.$refs.username.test(this.username);
@@ -47,26 +47,24 @@ export default {
       if (!result1 || !result2) {
         return;
       }
-      this.$axios({
+      const res = await this.$axios({
         method: "post",
         url: "/login",
         data: {
           username: this.username,
           password: this.password
         }
-      }).then(res => {
-        // console.log(res.data);
-        const {statusCode,message,data} = res.data
-
-        if (statusCode == 200) {
-          localStorage.setItem('token',data.token)
-          localStorage.setItem('user_id',data.user.id)
-          this.$toast.success(message);
-          this.$router.push("/user");
-        } else {
-          this.$toast.fail(message);
-        }
       });
+      // console.log(res.data);
+      const { statusCode, message, data } = res.data;
+      if (statusCode == 200) {
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("user_id", data.user.id);
+        this.$toast.success(message);
+        this.$router.push("/user");
+      } else {
+        this.$toast.fail(message);
+      }
     }
   },
   data() {
@@ -77,8 +75,8 @@ export default {
   },
   created() {
     // console.log(this.$route);
-    this.username = this.$route.params.username,
-    this.password = this.$route.params.password
+    (this.username = this.$route.params.username),
+      (this.password = this.$route.params.password);
   }
 };
 </script>

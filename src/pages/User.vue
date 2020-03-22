@@ -19,9 +19,17 @@
         <span class="iconfont iconjiantou1"></span>
       </div>
     </div>
-    <hm-navbar title="我的关注" content="关注的用户"></hm-navbar>
-    <hm-navbar title="我的跟帖" content="跟帖/回复"></hm-navbar>
-    <hm-navbar title="我的收藏" content="收藏/视频"></hm-navbar>
+    <hm-navbar
+      title="我的关注"
+      content="关注的用户"
+      @click="$router.push('/my-follow')"
+    ></hm-navbar>
+    <hm-navbar
+      title="我的跟帖"
+      content="跟帖/回复"
+      @click="$router.push('/my-comments')"
+    ></hm-navbar>
+    <hm-navbar title="我的收藏" @click="$router.push('/my-star')" content="收藏/视频"></hm-navbar>
     <hm-navbar title="设置" @click="$router.push('/edit')"></hm-navbar>
     <hm-navbar title="退出" @click="logout"></hm-navbar>
   </div>
@@ -32,44 +40,39 @@ export default {
   data() {
     return {
       info: {}
-    }
+    };
   },
-  created() {
-    const user_id = localStorage.getItem('user_id')
-    const token = localStorage.getItem('token')
-    this.$axios({
-      method: 'get',
-      url: `/user/${user_id}`,
-      headers: {
-        Authorization: token
-      }
-    }).then(res => {
-      // console.log(res.data)
-      const { statusCode, data } = res.data
-      if (statusCode == 200) {
-        this.info = data
-        // console.log(this.info)
-      }
-    })
+  async created() {
+    const user_id = localStorage.getItem("user_id");
+    const token = localStorage.getItem("token");
+    const res = await this.$axios({
+      method: "get",
+      url: `/user/${user_id}`
+    });
+    // console.log(res.data)
+    const { statusCode, data } = res.data;
+    if (statusCode == 200) {
+      this.info = data;
+      // console.log(this.info)
+    }
   },
   methods: {
-    logout() {
-      this.$dialog
-        .confirm({
-          title: '温馨提示',
-          message: '确定退出本系统吗?'
-        })
-        .then(() => {
-          localStorage.removeItem('token'), localStorage.removeItem('user_id')
-          this.$router.push('/login')
-          this.$toast.success('退出成功')
-        })
-        .catch(() => {
-          this.$toast('退出成功')
-        })
+    async logout() {
+      try {
+        await this.$dialog.confirm({
+          title: "温馨提示",
+          message: "确定退出本系统吗?"
+        });
+        localStorage.removeItem("token"), localStorage.removeItem("user_id");
+        this.$router.push("/login");
+        this.$toast.success("退出成功");
+      }
+      catch{
+        this.$toast('取消退出')
+      }
     }
   }
-}
+};
 </script>
 
 <style lang="less" scoped>
